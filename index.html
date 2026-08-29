@@ -1,0 +1,4634 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>Untuk Venny </title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            #ffffff20,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            #ffffff18,
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    color:white;
+
+    overflow-x:hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.star{
+
+    position:absolute;
+
+    color:white;
+
+    opacity:0;
+
+    animation:
+        starFloat linear infinite;
+}
+
+@keyframes starFloat{
+
+    0%{
+
+        transform:
+            translateY(110vh)
+            translateX(0)
+            rotate(0)
+            scale(.4);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:.8;
+    }
+
+    50%{
+
+        transform:
+            translateY(50vh)
+            translateX(35px)
+            rotate(180deg)
+            scale(1);
+
+        opacity:1;
+    }
+
+    80%{
+        opacity:.7;
+    }
+
+    100%{
+
+        transform:
+            translateY(-15vh)
+            translateX(-40px)
+            rotate(360deg)
+            scale(.3);
+
+        opacity:0;
+    }
+}
+
+.twinkle-star{
+
+    position:absolute;
+
+    color:white;
+
+    opacity:.5;
+
+    animation:
+        twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:.15;
+
+        transform:
+            scale(.6);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+            scale(1.5);
+    }
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+#musicButton{
+
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.2);
+
+    backdrop-filter:
+        blur(12px);
+
+    color:white;
+
+    font-size:21px;
+
+    cursor:pointer;
+
+    z-index:1000;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+#musicButton:hover{
+
+    transform:
+        scale(1.08);
+}
+
+#musicButton.playing{
+
+    animation:
+        musicPulse 1.5s
+        ease-in-out infinite;
+}
+
+@keyframes musicPulse{
+
+    0%,100%{
+
+        box-shadow:
+            0 8px 25px
+            rgba(255,255,255,.2);
+    }
+
+    50%{
+
+        box-shadow:
+            0 8px 35px
+            rgba(255,255,255,.65);
+    }
+}
+
+
+/* =========================================================
+   ENVELOPE SCREEN
+========================================================= */
+
+#envelopeScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #ffffff15,
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    transition:
+
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#envelopeScreen.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+.opening-text{
+
+    text-align:center;
+
+    margin-bottom:45px;
+}
+
+.opening-text h1{
+
+    font-size:
+        clamp(
+            25px,
+            5vw,
+            42px
+        );
+
+    margin-bottom:10px;
+}
+
+.opening-text p{
+
+    opacity:.75;
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-wrapper{
+
+    position:relative;
+
+    width:330px;
+    height:220px;
+
+    cursor:pointer;
+
+    animation:
+        envelopeFloat
+        3s ease-in-out infinite;
+
+    transition:
+        transform .8s ease;
+}
+
+@keyframes envelopeFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0);
+    }
+
+    50%{
+
+        transform:
+            translateY(-12px);
+    }
+}
+
+.envelope{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#f8f4ff;
+
+    border-radius:12px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.35);
+
+    overflow:hidden;
+}
+
+.envelope::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:#ddd1f0;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 55%,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+
+    z-index:3;
+}
+
+.flap{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:120px;
+
+    background:#eee5fa;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 100%,
+            100% 0
+        );
+
+    transform-origin:top;
+
+    transition:
+        transform 1s ease;
+
+    z-index:6;
+}
+
+.letter-preview{
+
+    position:absolute;
+
+    width:80%;
+    height:160px;
+
+    left:10%;
+    top:35px;
+
+    background:white;
+
+    border-radius:8px;
+
+    z-index:2;
+
+    transition:
+        transform 1s ease;
+}
+
+.heart-seal{
+
+    position:absolute;
+
+    width:52px;
+    height:52px;
+
+    left:
+        calc(50% - 26px);
+
+    top:95px;
+
+    z-index:10;
+
+    border-radius:50%;
+
+    background:#764ba2;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.25);
+
+    transition:.5s ease;
+}
+
+
+/* AMPLOP TERBUKA */
+
+.envelope-wrapper.open .flap{
+
+    transform:
+        rotateX(180deg);
+}
+
+.envelope-wrapper.open .letter-preview{
+
+    transform:
+        translateY(-130px);
+}
+
+.envelope-wrapper.open .heart-seal{
+
+    opacity:0;
+
+    transform:
+        scale(1.5);
+}
+
+
+/* =========================================================
+   ANIMASI AMPLOP SAAT KEMBALI
+========================================================= */
+
+.envelope-wrapper.closing{
+
+    animation:none;
+
+    transform:
+        scale(.85)
+        translateY(10px);
+}
+
+.envelope-wrapper.resetting{
+
+    animation:none;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.click-text{
+
+    margin-top:35px;
+
+    font-size:14px;
+
+    opacity:.75;
+
+    animation:
+        pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:.4;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+
+/* =========================================================
+   CRUMPLED PAPER
+========================================================= */
+
+#crumpleScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:80;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity .8s ease;
+}
+
+#crumpleScreen.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+}
+
+.crumple-wrapper{
+
+    position:relative;
+
+    width:
+        min(650px,88vw);
+
+    height:
+        min(500px,70vh);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    perspective:1800px;
+
+    cursor:pointer;
+}
+
+.crumpled-paper{
+
+    position:relative;
+
+    width:520px;
+    height:380px;
+
+    max-width:90vw;
+    max-height:65vh;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff,
+            #f5efff
+        );
+
+    border-radius:12px;
+
+    color:#4b3b60;
+
+    box-shadow:
+
+        0 35px 70px
+        rgba(0,0,0,.35),
+
+        inset 0 0 30px
+        rgba(100,70,150,.12);
+
+    transform-style:
+        preserve-3d;
+
+    transform:
+        rotate(-8deg)
+        scale(.52);
+
+    transition:
+
+        transform 1.3s
+        cubic-bezier(
+            .22,.61,.36,1
+        ),
+
+        border-radius 1.3s ease;
+
+    overflow:hidden;
+}
+
+.crumpled-paper::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20%;
+
+    background:
+
+        linear-gradient(
+            35deg,
+            transparent 42%,
+            rgba(120,90,150,.18) 43%,
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            transparent 43%,
+            rgba(255,255,255,.8) 44%,
+            transparent 46%
+        ),
+
+        linear-gradient(
+            75deg,
+            transparent 45%,
+            rgba(120,90,150,.12) 46%,
+            transparent 48%
+        );
+
+    transform:
+        rotate(8deg)
+        scale(1.4);
+
+    transition:
+        opacity 1s ease;
+}
+
+.crinkle{
+
+    position:absolute;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(100,70,130,.2),
+            rgba(255,255,255,.7),
+            transparent
+        );
+
+    z-index:3;
+}
+
+.crinkle1{
+
+    width:130%;
+    height:3px;
+
+    left:-15%;
+    top:25%;
+
+    transform:
+        rotate(18deg);
+}
+
+.crinkle2{
+
+    width:120%;
+    height:2px;
+
+    left:-10%;
+    top:55%;
+
+    transform:
+        rotate(-14deg);
+}
+
+.crinkle3{
+
+    width:3px;
+    height:130%;
+
+    top:-15%;
+    left:38%;
+
+    transform:
+        rotate(20deg);
+}
+
+.crinkle4{
+
+    width:2px;
+    height:120%;
+
+    top:-10%;
+    left:67%;
+
+    transform:
+        rotate(-16deg);
+}
+
+.crinkle5{
+
+    width:100%;
+    height:4px;
+
+    left:0;
+    top:72%;
+
+    transform:
+        rotate(7deg);
+}
+
+.paper-letter-content{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:40px;
+
+    opacity:0;
+
+    transform:
+        scale(.8);
+
+    transition:
+
+        opacity .8s ease,
+        transform 1s ease;
+}
+
+.paper-letter-content .small{
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:#967fb7;
+}
+
+.paper-letter-content h2{
+
+    font-size:60px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #667eea,
+            #764ba2
+        );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:
+        transparent;
+}
+
+.paper-letter-content p{
+
+    color:#796987;
+
+    line-height:1.7;
+}
+
+.step0{
+
+    transform:
+        rotate(-8deg)
+        scale(.52);
+}
+
+.step1{
+
+    transform:
+        rotate(5deg)
+        scale(.67)
+        rotateY(-10deg);
+}
+
+.step2{
+
+    transform:
+        rotate(-3deg)
+        scale(.82)
+        rotateY(5deg);
+}
+
+.step3{
+
+    transform:
+        rotate(1deg)
+        scale(.94);
+}
+
+.step4{
+
+    transform:
+        rotate(0deg)
+        scale(1);
+
+    border-radius:10px;
+}
+
+.step4::before{
+
+    opacity:.05;
+}
+
+.step4 .paper-letter-content{
+
+    opacity:1;
+
+    transform:
+        scale(1);
+}
+
+.crumple-instruction{
+
+    position:absolute;
+
+    bottom:-65px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    white-space:nowrap;
+
+    font-size:14px;
+}
+
+.crumple-progress{
+
+    position:absolute;
+
+    top:-65px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    display:flex;
+
+    gap:8px;
+}
+
+.progress-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.3);
+
+    transition:.3s;
+}
+
+.progress-dot.active{
+
+    background:white;
+
+    transform:
+        scale(1.5);
+}
+
+
+/* =========================================================
+   FINAL LETTER
+========================================================= */
+
+#letterPage{
+
+    min-height:100vh;
+
+    padding:
+        70px 20px;
+
+    opacity:0;
+
+    transform:
+        translateY(80px)
+        scale(.98);
+
+    pointer-events:none;
+
+    transition:
+
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+#letterPage.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events:auto;
+}
+
+
+/* =========================================================
+   ANIMASI SURAT MENUTUP
+========================================================= */
+
+#letterPage.closing{
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transform:
+        translateY(80px)
+        scale(.88)
+        rotateX(12deg);
+
+    filter:
+        blur(4px);
+
+    transition:
+
+        opacity 1s ease,
+        transform 1s ease,
+        filter 1s ease;
+}
+
+.letter-container{
+
+    width:
+        min(850px,100%);
+
+    margin:auto;
+}
+
+.letter{
+
+    background:
+        rgba(255,255,255,.97);
+
+    color:#3d3155;
+
+    border-radius:25px;
+
+    padding:
+        50px 35px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.3);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.letter::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:7px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #667eea,
+            #764ba2,
+            #ec6ead
+        );
+}
+
+.letter-top{
+
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+.letter-top .small{
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:#967fb7;
+}
+
+.letter-top h1{
+
+    font-size:
+        clamp(
+            45px,
+            10vw,
+            75px
+        );
+
+    margin-top:8px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #667eea,
+            #764ba2
+        );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:
+        transparent;
+}
+
+.letter-top p{
+
+    color:#8b7c9e;
+
+    max-width:600px;
+
+    margin:auto;
+
+    line-height:1.7;
+}
+
+.line{
+
+    width:70px;
+
+    height:3px;
+
+    background:#764ba2;
+
+    margin:20px auto;
+
+    border-radius:20px;
+}
+
+
+/* =========================================================
+   PHOTO SLIDER
+========================================================= */
+
+.photo-section{
+
+    text-align:center;
+
+    margin:
+        10px auto 45px;
+
+    max-width:700px;
+}
+
+.photo-title{
+
+    color:#764ba2;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+}
+
+.photo-slider{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:650px;
+
+    aspect-ratio:
+        4 / 3;
+
+    margin:auto;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:#eee;
+
+    box-shadow:
+        0 20px 45px
+        rgba(60,40,90,.3);
+
+    border:
+        10px solid white;
+}
+
+.photo-slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transform:
+        scale(1.04);
+
+    transition:
+
+        opacity .8s ease,
+        transform 1.2s ease;
+
+    cursor:pointer;
+}
+
+.photo-slide.active{
+
+    opacity:1;
+
+    transform:
+        scale(1);
+}
+
+.photo-slide img{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+
+.photo-arrow{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    width:45px;
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.85);
+
+    color:#764ba2;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    z-index:10;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.2);
+
+    transition:.3s;
+}
+
+.photo-arrow:hover{
+
+    transform:
+        translateY(-50%)
+        scale(1.1);
+
+    background:white;
+}
+
+.photo-prev{
+    left:12px;
+}
+
+.photo-next{
+    right:12px;
+}
+
+.photo-counter{
+
+    position:absolute;
+
+    bottom:12px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        rgba(0,0,0,.45);
+
+    color:white;
+
+    padding:
+        6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    z-index:10;
+
+    backdrop-filter:
+        blur(5px);
+}
+
+.photo-dots{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:7px;
+
+    margin-top:15px;
+
+    flex-wrap:wrap;
+}
+
+.photo-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#d5c7e5;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.photo-dot.active{
+
+    width:24px;
+
+    border-radius:10px;
+
+    background:#764ba2;
+}
+
+.photo-caption{
+
+    margin-top:15px;
+
+    color:#8b7c9e;
+
+    font-size:13px;
+
+    font-style:italic;
+}
+
+.photo-hint{
+
+    color:#9a8ba8;
+
+    font-size:11px;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   FULLSCREEN PHOTO
+========================================================= */
+
+#photoModal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:2000;
+
+    background:
+        rgba(20,10,35,.9);
+
+    backdrop-filter:
+        blur(10px);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+#photoModal.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+}
+
+.modal-content{
+
+    position:relative;
+
+    width:
+        min(900px,95vw);
+
+    max-height:90vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content img{
+
+    max-width:100%;
+
+    max-height:85vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.5);
+}
+
+.modal-close{
+
+    position:absolute;
+
+    right:-10px;
+
+    top:-50px;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#764ba2;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   CHAT AREA
+========================================================= */
+
+.chat-area{
+
+    position:relative;
+
+    padding:
+        35px 20px 50px;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(118,75,162,.08),
+            transparent 25%
+        ),
+
+        #faf8fc;
+
+    overflow:hidden;
+}
+
+.chat-date{
+
+    width:max-content;
+
+    margin:
+        0 auto 35px;
+
+    padding:
+        7px 14px;
+
+    border-radius:15px;
+
+    background:#e9def1;
+
+    color:#776484;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   MESSAGE
+   KIRI DAN KANAN
+========================================================= */
+
+.message{
+
+    position:relative;
+
+    display:flex;
+
+    width:100%;
+
+    margin:
+        28px 0;
+
+    opacity:0;
+
+    transform:
+        translateX(-100px)
+        translateY(30px)
+        scale(.94);
+
+    transition:
+
+        opacity .8s
+        cubic-bezier(
+            .22,.61,.36,1
+        ),
+
+        transform .8s
+        cubic-bezier(
+            .22,.61,.36,1
+        );
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   PESAN DARI KIRI
+========================================================= */
+
+.message.from-left{
+
+    justify-content:flex-start;
+
+    transform:
+        translateX(-100px)
+        translateY(30px)
+        scale(.94);
+}
+
+
+/* =========================================================
+   PESAN DARI KANAN
+========================================================= */
+
+.message.from-right{
+
+    justify-content:flex-end;
+
+    transform:
+        translateX(100px)
+        translateY(30px)
+        scale(.94);
+}
+
+
+/* =========================================================
+   PESAN SUDAH MUNCUL
+========================================================= */
+
+.message.from-left.visible,
+.message.from-right.visible{
+
+    opacity:1;
+
+    transform:
+        translateX(0)
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   MESSAGE BUBBLE
+========================================================= */
+
+.message-bubble{
+
+    position:relative;
+
+    max-width:
+        min(70%,560px);
+
+    padding:
+        13px 16px;
+
+    border-radius:17px;
+
+    background:#e9d9fa;
+
+    color:#4d405a;
+
+    font-size:14px;
+
+    line-height:1.65;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,50,90,.1);
+
+    transition:
+
+        box-shadow .4s ease,
+        transform .4s ease;
+}
+
+
+/* =========================================================
+   BUBBLE KIRI
+========================================================= */
+
+.message.from-left
+.message-bubble{
+
+    border-top-left-radius:4px;
+
+    border-top-right-radius:17px;
+}
+
+
+/* =========================================================
+   BUBBLE KANAN
+========================================================= */
+
+.message.from-right
+.message-bubble{
+
+    border-top-right-radius:4px;
+
+    border-top-left-radius:17px;
+}
+
+
+/* =========================================================
+   EKOR KIRI
+========================================================= */
+
+.message.from-left
+.message-bubble::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-8px;
+
+    border-top:
+        10px solid #e9d9fa;
+
+    border-left:
+        8px solid transparent;
+}
+
+
+/* =========================================================
+   EKOR KANAN
+========================================================= */
+
+.message.from-right
+.message-bubble::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    right:-8px;
+
+    border-top:
+        10px solid #e9d9fa;
+
+    border-right:
+        8px solid transparent;
+}
+
+
+/* =========================================================
+   HOVER BUBBLE
+========================================================= */
+
+.message-bubble:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(70,50,90,.14);
+}
+
+
+/* =========================================================
+   MESSAGE TIME
+========================================================= */
+
+.message-time{
+
+    float:right;
+
+    margin-left:12px;
+
+    margin-top:5px;
+
+    color:#8d799d;
+
+    font-size:9px;
+}
+
+.check{
+
+    color:#6b8eea;
+
+    font-weight:bold;
+}
+
+
+/* =========================================================
+   SPECIAL MESSAGE
+========================================================= */
+
+.special-message{
+
+    margin:
+        40px auto;
+
+    max-width:90%;
+
+    padding:18px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f0e8ff,
+            #fff
+        );
+
+    border:
+        1px solid #e4d6f3;
+
+    color:#6d5880;
+
+    font-style:italic;
+
+    opacity:0;
+
+    transform:
+        translateY(40px);
+
+    transition:.8s ease;
+}
+
+.special-message.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   THANK BOX
+========================================================= */
+
+.thank-box{
+
+    margin:
+        35px auto 10px;
+
+    padding:28px;
+
+    max-width:700px;
+
+    text-align:center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f4ecff,
+            #fff
+        );
+
+    border-radius:20px;
+
+    color:#5e4c75;
+
+    border:
+        1px solid #e6d9f2;
+
+    opacity:0;
+
+    transform:
+        translateY(40px);
+
+    transition:1s ease;
+}
+
+.thank-box.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.thank-box h2{
+
+    margin-bottom:12px;
+
+    color:#764ba2;
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.signature{
+
+    margin:
+        35px auto 0;
+
+    text-align:center;
+
+    color:#7b6b8d;
+
+    opacity:0;
+
+    transform:
+        translateY(30px);
+
+    transition:1s ease;
+}
+
+.signature.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.signature strong{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:18px;
+
+    color:#5e4a78;
+}
+
+
+/* =========================================================
+   END
+========================================================= */
+
+.end{
+
+    text-align:center;
+
+    margin:
+        30px auto 0;
+
+    padding-top:25px;
+
+    border-top:
+        1px solid #eee;
+
+    color:#9b8ba9;
+
+    font-size:13px;
+
+    opacity:0;
+
+    transform:
+        translateY(30px);
+
+    transition:1s ease;
+}
+
+.end.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   TOMBOL TUTUP SURAT
+========================================================= */
+
+.close-letter-area{
+
+    margin-top:45px;
+
+    text-align:center;
+
+    padding-top:30px;
+
+    border-top:
+        1px solid #eee;
+}
+
+.close-letter-button{
+
+    border:none;
+
+    padding:
+        14px 26px;
+
+    border-radius:30px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #667eea,
+            #764ba2
+        );
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(100,70,150,.25);
+
+    transition:
+
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.close-letter-button:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 15px 35px
+        rgba(100,70,150,.35);
+}
+
+.close-letter-button:active{
+
+    transform:
+        scale(.96);
+}
+
+.close-hint{
+
+    margin-top:10px;
+
+    color:#a090ad;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   ANIMASI PENUTUP SURAT
+========================================================= */
+
+#closingAnimation{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:3000;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    background:
+        rgba(40,20,60,.15);
+
+    transition:
+
+        opacity .5s ease,
+        visibility .5s ease;
+}
+
+#closingAnimation.active{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+.closing-paper{
+
+    width:
+        min(430px,80vw);
+
+    aspect-ratio:
+        4 / 3;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff,
+            #f5efff
+        );
+
+    border-radius:15px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.35);
+
+    transform:
+
+        perspective(900px)
+        rotateX(0)
+        scale(1);
+
+    opacity:0;
+
+    transition:
+
+        transform 1s ease,
+        opacity .7s ease;
+}
+
+#closingAnimation.active
+.closing-paper{
+
+    opacity:1;
+
+    transform:
+
+        perspective(900px)
+        rotateX(80deg)
+        scale(.65)
+        translateY(80px);
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+.confetti{
+
+    position:fixed;
+
+    top:-30px;
+
+    z-index:999;
+
+    pointer-events:none;
+
+    animation:
+        fall 4s
+        linear forwards;
+}
+
+@keyframes fall{
+
+    0%{
+
+        transform:
+            translateY(0)
+            rotate(0);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .envelope-wrapper{
+
+        width:280px;
+        height:185px;
+    }
+
+    .letter{
+
+        padding:
+            40px 10px;
+    }
+
+    .photo-slider{
+
+        width:100%;
+
+        aspect-ratio:
+            4 / 3;
+
+        border-width:7px;
+    }
+
+    .photo-arrow{
+
+        width:38px;
+        height:38px;
+
+        font-size:20px;
+    }
+
+    .message-bubble{
+
+        max-width:84%;
+
+        font-size:13px;
+    }
+
+    .chat-area{
+
+        padding:
+            25px 10px 40px;
+    }
+
+    #musicButton{
+
+        width:45px;
+        height:45px;
+
+        right:15px;
+        bottom:15px;
+    }
+
+    .modal-close{
+
+        right:0;
+        top:-50px;
+    }
+
+    .closing-paper{
+
+        width:82vw;
+    }
+
+    .message.from-left{
+
+        transform:
+            translateX(-70px)
+            translateY(25px)
+            scale(.94);
+    }
+
+    .message.from-right{
+
+        transform:
+            translateX(70px)
+            translateY(25px)
+            scale(.94);
+    }
+
+    .message.from-left.visible,
+    .message.from-right.visible{
+
+        transform:
+            translateX(0)
+            translateY(0)
+            scale(1);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     MUSIC
+========================================================= -->
+
+<audio
+id="bgMusic"
+loop
+preload="auto"
+
+>
+
+```
+<source
+    src="nala.mpeg"
+    type="audio/mpeg"
+>
+```
+
+</audio>
+
+<button
+id="musicButton"
+onclick="toggleMusic()"
+
+>
+
+```
+🔇
+```
+
+</button>
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div
+    class="background"
+    id="background"
+></div>
+
+<!-- =========================================================
+     ENVELOPE SCREEN
+========================================================= -->
+
+<section
+    id="envelopeScreen"
+>
+
+```
+<div class="opening-text">
+
+    <h1>
+        Ada sesuatu untukmu...
+    </h1>
+
+    <p>
+        Sebuah pesan kecil untuk Venny 🤍
+    </p>
+
+</div>
+
+
+<div
+    class="envelope-wrapper"
+    id="envelope"
+    onclick="openEnvelope()"
+>
+
+    <div class="envelope">
+
+        <div
+            class="letter-preview"
+        ></div>
+
+        <div
+            class="flap"
+        ></div>
+
+        <div
+            class="heart-seal"
+        >
+            🤍
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="click-text">
+
+    ✨ Klik amplop untuk membuka ✨
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     CRUMPLED PAPER
+========================================================= -->
+
+<section
+    id="crumpleScreen"
+>
+
+```
+<div class="crumple-wrapper">
+
+    <div class="crumple-progress">
+
+        <div
+            class="progress-dot"
+            id="dot1"
+        ></div>
+
+        <div
+            class="progress-dot"
+            id="dot2"
+        ></div>
+
+        <div
+            class="progress-dot"
+            id="dot3"
+        ></div>
+
+        <div
+            class="progress-dot"
+            id="dot4"
+        ></div>
+
+    </div>
+
+
+    <div
+        class="crumpled-paper step0"
+        id="crumpledPaper"
+        onclick="openCrumpledPaper()"
+    >
+
+        <div
+            class="crinkle crinkle1"
+        ></div>
+
+        <div
+            class="crinkle crinkle2"
+        ></div>
+
+        <div
+            class="crinkle crinkle3"
+        ></div>
+
+        <div
+            class="crinkle crinkle4"
+        ></div>
+
+        <div
+            class="crinkle crinkle5"
+        ></div>
+
+
+        <div
+            class="paper-letter-content"
+        >
+
+            <div class="small">
+                Sebuah surat kecil
+            </div>
+
+            <h2>
+                VENNY
+            </h2>
+
+            <p>
+                Sedikit ucapan terima kasih,
+                sedikit permintaan maaf,
+                dan banyak cerita dari KKN.
+            </p>
+
+            <br>
+
+            <p>
+                ✨ Suratnya sudah terbuka ✨
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="crumple-instruction"
+        id="crumpleInstruction"
+    >
+
+        ✨ Klik kertas untuk membukanya ✨
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     FINAL LETTER
+========================================================= -->
+
+<main
+    id="letterPage"
+>
+
+<div class="letter-container">
+
+<article class="letter">
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="letter-top">
+
+```
+<div class="small">
+
+    Sebuah pesan kecil
+
+</div>
+
+
+<h1>
+
+    VENNY
+
+</h1>
+
+
+<p>
+
+    Sedikit ucapan maaf,
+    banyak ucapan makasih,
+    dan beberapa cerita random
+    dari perjalanan KKN kita. 
+
+</p>
+
+
+<div class="line"></div>
+```
+
+</header>
+
+<!-- =========================================================
+     FOTO
+========================================================= -->
+
+<section
+    class="photo-section"
+>
+
+```
+<div class="photo-title">
+
+    📸 Kenangan KKN Kita 🤍
+
+</div>
+
+
+<div
+    class="photo-slider"
+    id="photoSlider"
+>
+
+    <div
+        class="photo-slide active"
+        onclick="openPhotoModal(0)"
+    >
+
+        <img
+            src="elsa.jpeg"
+            alt="Kenangan Venny"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(1)"
+    >
+
+        <img
+            src="kenangan1.jpeg"
+            alt="Kenangan 1"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(2)"
+    >
+
+        <img
+            src="kenangan2.jpeg"
+            alt="Kenangan 2"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(3)"
+    >
+
+        <img
+            src="kenangan3.jpeg"
+            alt="Kenangan 3"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(4)"
+    >
+
+        <img
+            src="kenangan4.jpeg"
+            alt="Kenangan 4"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(5)"
+    >
+
+        <img
+            src="kenangan5.jpeg"
+            alt="Kenangan 5"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(6)"
+    >
+
+        <img
+            src="kenangan6.jpeg"
+            alt="Kenangan 6"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(7)"
+    >
+
+        <img
+            src="kenangan7.jpeg"
+            alt="Kenangan 7"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(8)"
+    >
+
+        <img
+            src="kenangan8.jpeg"
+            alt="Kenangan 8"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(9)"
+    >
+
+        <img
+            src="kenangan9.jpeg"
+            alt="Kenangan 9"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(10)"
+    >
+
+        <img
+            src="kenangan10.jpeg"
+            alt="Kenangan 10"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(11)"
+    >
+
+        <img
+            src="kenangan11.jpeg"
+            alt="Kenangan 11"
+        >
+
+    </div>
+
+
+    <div
+        class="photo-slide"
+        onclick="openPhotoModal(12)"
+    >
+
+        <img
+            src="kenangan12.jpeg"
+            alt="Kenangan 12"
+        >
+
+    </div>
+
+
+    <button
+        class="photo-arrow photo-prev"
+        onclick="
+            event.stopPropagation();
+            previousPhoto();
+        "
+    >
+        ‹
+    </button>
+
+
+    <button
+        class="photo-arrow photo-next"
+        onclick="
+            event.stopPropagation();
+            nextPhoto();
+        "
+    >
+        ›
+    </button>
+
+
+    <div
+        class="photo-counter"
+        id="photoCounter"
+    >
+        1 / 13
+    </div>
+
+</div>
+
+
+<div
+    class="photo-dots"
+    id="photoDots"
+></div>
+
+
+<p class="photo-caption">
+
+    Salah satu bagian dari cerita KKN
+    yang mungkin kelihatannya sederhana,
+    tapi ternyata bakal susah dilupain. 
+
+</p>
+
+
+<div class="photo-hint">
+
+    ✨ Foto berganti otomatis
+    • Klik foto untuk melihat lebih besar ✨
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     CHAT
+========================================================= -->
+
+<section
+    class="chat-area"
+>
+
+<div class="chat-date">
+    Hari ini
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Untuk Venny,
+        PDD kita yang satu ini 
+        <span class="message-time">20:01 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Venny...
+        <span class="message-time">20:02 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Sebenarnya aku agak bingung mau mulai dari mana. 😭
+        <br><br>
+        Tapi yaudah, tulis aja dulu sebelum kepikiran seribu kali wkwk.
+        <span class="message-time">20:03 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Pertama-tama, aku mau bilang satu hal dulu...
+        <br><br>
+        <b>Makasih banyak, ya, Venny.</b> 
+        <br><br>
+        Makasih sudah mau jadi PDD selama KKN dan ikut mengabadikan
+        banyak momen yang akhirnya sekarang jadi kenangan.
+        <span class="message-time">20:04 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Makasih juga karena selama aku jadi ketua, kamu mau kasih saran
+        dan mengingatkan aku tentang satu hal yang menurutku penting banget.
+        <br><br>
+        Bahwa menjadi ketua itu bukan berarti aku harus selalu merasa paling benar
+        atau langsung mengambil keputusan sendiri.
+        <span class="message-time">20:05 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Kamu pernah mengingatkan aku bahwa menjadi ketua bukan berarti
+        tidak mendengarkan pendapat dari anggota yang lain.
+        <br><br>
+        Justru aku harus mau mendengarkan bagaimana pendapat mereka,
+        memahami apa yang mereka pikirkan, dan memberi ruang buat mereka menyampaikan pendapat.
+        <span class="message-time">20:06 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Dan iya... aku juga belajar bahwa aku nggak boleh langsung
+        memotong pendapat orang lain hanya karena aku merasa sudah tahu
+        jawabannya atau sudah punya keputusan sendiri. 😭
+        <br><br>
+        Nasihat itu mungkin kelihatannya sederhana, tapi buatku cukup berarti.
+        <span class="message-time">20:07 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="special-message">
+    Kadang orang yang mengingatkan kita bukan berarti sedang menyalahkan kita.
+    <br><br>
+    Justru dari orang-orang seperti itu kita bisa sadar kalau masih banyak hal
+    dalam diri kita yang perlu diperbaiki. Dan aku berterima kasih karena kamu
+    mau menyampaikannya xoxoxoxo. 
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Terus ada satu hal yang sampai sekarang masih aku ingat... 😂
+        <br><br>
+        <b>“Emang kamu udah jadi ketua yang baik?”</b> 😭😂
+        <br><br>
+        Kata-kata legendaris itu sih wkwkwk.
+        <span class="message-time">20:08 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Jujur, kalimat itu memang bikin mikir. 😂
+        <br><br>
+        Karena pada akhirnya jadi ketua itu bukan soal jabatan,
+        tapi soal bagaimana aku bisa membawa kelompok, mendengarkan orang lain,
+        dan belajar bertanggung jawab atas keputusan yang aku ambil.
+        <span class="message-time">20:09 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Dan aku juga mau bilang makasih banget karena kamu tetap menyelesaikan
+        <b>movi KKN</b> yang waktunya benar-benar sangat mepet itu. 😭🔥
+        <br><br>
+        Di tengah segala kesibukan dan deadline yang kejar-kejaran,
+        kamu tetap mau beresin sampai selesai.
+        <span class="message-time">20:10 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Mungkin waktu itu kita cuma fokus bagaimana caranya movi selesai tepat waktu,
+        tapi sekarang kalau dipikir-pikir, itu juga jadi salah satu bagian dari
+        cerita KKN yang bakal kita ingat. 😂
+        <br><br>
+        Makasih sudah mau repot dan menyelesaikannya sampai akhir.
+        <span class="message-time">20:11 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Selain itu, aku juga mau minta maaf untuk sesuatu yang terjadi
+        sebelum KKN dimulai.
+        <br><br>
+        Kalau dulu aku cukup sering chat kamu, aku benar-benar minta maaf.
+        <span class="message-time">20:12 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Aku nggak punya maksud lain sama sekali.
+        Aku cuma mau <i>ngup</i> dan memastikan hal-hal yang berkaitan
+        dengan persiapan KKN, tapi aku sadar dari sudut pandangmu mungkin
+        kesannya aku terlalu sering menghubungi atau terlalu mengganggu.
+        <span class="message-time">20:13 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Dan kalau ternyata chat-chat dariku waktu itu membuat pacarmu
+        merasa tidak nyaman, aku juga benar-benar minta maaf sebesar-besarnya.
+        <br><br>
+        Aku sama sekali nggak bermaksud membuat keadaan jadi seperti itu.
+        <span class="message-time">20:14 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Kalau ada sikapku sebelum atau selama KKN yang terasa berlebihan,
+        mengganggu, atau membuat kamu kurang nyaman, sekali lagi aku minta maaf. 🤍
+        <br><br>
+        Kadang niat kita mungkin sederhana, tapi cara kita menyampaikannya
+        bisa saja diterima berbeda oleh orang lain. Dan aku belajar dari situ.
+        <span class="message-time">20:15 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Tapi terlepas dari semua itu, aku tetap bersyukur pernah satu perjalanan
+        sama kamu selama KKN ini.
+        <br><br>
+        Ada banyak hal yang bisa dikenang: capeknya, deadline-nya, kerja samanya,
+        movinya, sampai teguran-teguran kecil yang ternyata malah jadi pelajaran. 😂
+        <span class="message-time">20:16 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Jadi... makasih banyak, Venny.
+        <br><br>
+        Makasih sudah jadi PDD, makasih sudah memberi saran kepadaku sebagai ketua,
+        makasih sudah mau menyelesaikan movi yang sangat mepet, dan makasih juga
+        untuk kata-kata legendaris yang sampai sekarang masih aku ingat. 😂
+        <span class="message-time">20:17 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Semoga setelah KKN selesai, yang kita ingat bukan cuma capek dan ribetnya,
+        tapi juga semua proses yang membuat kita belajar jadi pribadi yang lebih baik.
+        <br><br>
+        Terutama buat aku sendiri, semoga nasihatmu soal mendengarkan pendapat orang lain
+        benar-benar bisa aku bawa setelah KKN ini selesai. 🤍
+        <span class="message-time">20:18 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+<div class="message">
+    <div class="message-bubble">
+        Pokoknya...
+        <br><br>
+        <b>Terima kasih sudah pernah berjalan bareng di cerita KKN ini, Venny. 🤍</b>
+        <br><br>
+        Dan sekali lagi, maaf untuk semua hal yang mungkin pernah membuatmu
+        merasa kurang nyaman, baik sebelum maupun selama KKN.
+        <span class="message-time">20:19 <span class="check">✓✓</span></span>
+    </div>
+</div>
+
+</section>
+
+<!-- =========================================================
+     THANK YOU
+========================================================= -->
+
+<div class="thank-box">
+
+<h2>
+    Terima Kasih, Venny
+</h2>
+
+<p>
+    Makasih sudah mau menjadi PDD selama KKN dan sudah ikut mengabadikan
+    banyak cerita yang sekarang menjadi bagian dari kenangan kita.
+
+    <br><br>
+
+    Makasih juga sudah mau memberi saran kepadaku sebagai ketua.
+    Aku belajar bahwa menjadi ketua bukan berarti tidak mendengarkan pendapat
+    anggota lain, tetapi justru harus mau mendengarkan, memahami, dan memberi
+    ruang untuk pendapat mereka. Aku juga belajar untuk tidak langsung memotong
+    pendapat orang lain.
+
+    <br><br>
+
+    Makasih sudah menyelesaikan movi KKN yang waktunya sangat mepet itu,
+    dan tentu saja makasih untuk kata-kata legendaris:
+    <b>“Emang kamu udah jadi ketua yang baik?”</b> 😂
+
+    <br><br>
+
+    Aku juga minta maaf sebesar-besarnya kalau sebelum KKN aku terlalu sering
+    chat kamu. Aku nggak punya maksud lain, cuma mau <i>ngup</i>, tapi aku sadar
+    mungkin dari sisi kamu kesannya aku terlalu mengganggu. Kalau hal itu juga
+    membuat pacarmu merasa tidak nyaman, aku benar-benar minta maaf.
+
+    <br><br>
+
+    Semoga semua hal baik dari perjalanan ini tetap menjadi kenangan yang
+    menyenangkan untuk diingat. 🤍
+</p>
+</div>
+
+<!-- =========================================================
+     SIGNATURE
+========================================================= -->
+
+<div class="signature">
+
+```
+Makasih sudah menjadi bagian
+dari cerita kecil ini.
+
+<strong>
+
+    Joan
+
+    <br>
+
+    seseorang yang bersyukur
+    pernah satu perjalanan
+    denganmu.
+
+</strong>
+```
+
+</div>
+
+<!-- =========================================================
+     END
+========================================================= -->
+
+<div class="end">
+
+```
+✨ KKN mungkin selesai,
+tapi cerita dan kenangannya
+semoga tetap tinggal. ✨
+
+<br><br>
+
+<b>
+    Thank you, Venny.
+</b>
+```
+
+</div>
+
+<!-- =========================================================
+     TOMBOL TUTUP SURAT
+========================================================= -->
+
+<div class="close-letter-area">
+
+```
+<button
+    class="close-letter-button"
+    onclick="closeLetter()"
+>
+
+    💌 Tutup Surat
+
+</button>
+
+
+<div class="close-hint">
+
+    Klik untuk mengembalikan surat
+    seperti semula 🤍
+
+</div>
+```
+
+</div>
+
+</article>
+
+</div>
+
+</main>
+
+<!-- =========================================================
+     ANIMASI PENUTUP
+========================================================= -->
+
+<div
+    id="closingAnimation"
+>
+
+```
+<div
+    class="closing-paper"
+></div>
+```
+
+</div>
+
+<!-- =========================================================
+     PHOTO MODAL
+========================================================= -->
+
+<div
+    id="photoModal"
+    onclick="closePhotoModal()"
+>
+
+```
+<div
+    class="modal-content"
+    onclick="event.stopPropagation()"
+>
+
+    <button
+        class="modal-close"
+        onclick="closePhotoModal()"
+    >
+        ×
+    </button>
+
+
+    <img
+        id="modalImage"
+        src=""
+        alt="Foto kenangan"
+    >
+
+</div>
+```
+
+</div>
+
+<script>
+
+
+/* =========================================================
+   BACKGROUND STARS
+========================================================= */
+
+const background =
+    document.getElementById(
+        "background"
+    );
+
+
+const starSymbols = [
+
+    "✦",
+    "✧",
+    "⋆",
+    "✶",
+    "✷",
+    "✹",
+    "·"
+
+];
+
+
+for(
+    let i=0;
+    i<35;
+    i++
+){
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+
+    star.className =
+        "star";
+
+
+    star.innerHTML =
+        starSymbols[
+            Math.floor(
+                Math.random() *
+                starSymbols.length
+            )
+        ];
+
+
+    star.style.left =
+        Math.random()*100+
+        "vw";
+
+
+    star.style.fontSize =
+        Math.random()*18+
+        8+
+        "px";
+
+
+    star.style.animationDuration =
+        Math.random()*8+
+        8+
+        "s";
+
+
+    star.style.animationDelay =
+        Math.random()*8+
+        "s";
+
+
+    background.appendChild(
+        star
+    );
+}
+
+
+for(
+    let i=0;
+    i<30;
+    i++
+){
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+
+    star.className =
+        "twinkle-star";
+
+
+    star.innerHTML =
+        "✦";
+
+
+    star.style.left =
+        Math.random()*100+
+        "%";
+
+
+    star.style.top =
+        Math.random()*100+
+        "%";
+
+
+    star.style.fontSize =
+        Math.random()*8+
+        5+
+        "px";
+
+
+    star.style.animationDelay =
+        Math.random()*3+
+        "s";
+
+
+    background.appendChild(
+        star
+    );
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+const bgMusic =
+    document.getElementById(
+        "bgMusic"
+    );
+
+
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
+
+
+function updateMusicButton(){
+
+    if(bgMusic.paused){
+
+        musicButton.innerHTML =
+            "🔇";
+
+        musicButton.classList.remove(
+            "playing"
+        );
+
+    }else{
+
+        musicButton.innerHTML =
+            "🎵";
+
+        musicButton.classList.add(
+            "playing"
+        );
+
+    }
+}
+
+
+function startMusic(){
+
+    bgMusic.volume =
+        .35;
+
+
+    bgMusic.play()
+        .then(
+            updateMusicButton
+        )
+        .catch(()=>{
+
+            console.log(
+                "Browser membutuhkan klik user untuk musik."
+            );
+
+        });
+}
+
+
+function stopMusic(){
+
+    bgMusic.pause();
+
+    bgMusic.currentTime =
+        0;
+
+    updateMusicButton();
+}
+
+
+function toggleMusic(){
+
+    if(bgMusic.paused){
+
+        bgMusic.volume =
+            .35;
+
+        bgMusic.play()
+            .then(
+                updateMusicButton
+            );
+
+    }else{
+
+        bgMusic.pause();
+
+        updateMusicButton();
+
+    }
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+let envelopeOpened =
+    false;
+
+
+function openEnvelope(){
+
+    if(envelopeOpened)
+        return;
+
+
+    envelopeOpened =
+        true;
+
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    const envelopeScreen =
+        document.getElementById(
+            "envelopeScreen"
+        );
+
+
+    const crumpleScreen =
+        document.getElementById(
+            "crumpleScreen"
+        );
+
+
+    startMusic();
+
+
+    envelope.classList.add(
+        "open"
+    );
+
+
+    createConfetti();
+
+
+    setTimeout(()=>{
+
+        envelopeScreen.classList.add(
+            "hide"
+        );
+
+    },1200);
+
+
+    setTimeout(()=>{
+
+        crumpleScreen.classList.add(
+            "active"
+        );
+
+    },1700);
+
+}
+
+
+/* =========================================================
+   CRUMPLED PAPER
+========================================================= */
+
+let paperStep =
+    0;
+
+
+let paperBusy =
+    false;
+
+
+function openCrumpledPaper(){
+
+    if(
+        paperBusy ||
+        paperStep >= 4
+    )
+        return;
+
+
+    paperBusy =
+        true;
+
+
+    paperStep++;
+
+
+    const paper =
+        document.getElementById(
+            "crumpledPaper"
+        );
+
+
+    const instruction =
+        document.getElementById(
+            "crumpleInstruction"
+        );
+
+
+    paper.className =
+        "crumpled-paper step"+
+        paperStep;
+
+
+    updateProgress();
+
+
+    if(paperStep === 1){
+
+        instruction.innerHTML =
+            "💫 Kertas mulai terbuka...";
+
+    }
+
+
+    if(paperStep === 2){
+
+        instruction.innerHTML =
+            "✨ Sedikit lagi...";
+
+    }
+
+
+    if(paperStep === 3){
+
+        instruction.innerHTML =
+            "🤍 Surat mulai terlihat...";
+
+    }
+
+
+    if(paperStep === 4){
+
+        instruction.innerHTML =
+            "💌 Surat terbuka...";
+
+    }
+
+
+    setTimeout(()=>{
+
+        paperBusy =
+            false;
+
+    },1350);
+
+
+    if(paperStep === 4){
+
+        setTimeout(()=>{
+
+            showFinalLetter();
+
+        },2200);
+
+    }
+}
+
+
+function updateProgress(){
+
+    for(
+        let i=1;
+        i<=4;
+        i++
+    ){
+
+        const dot =
+            document.getElementById(
+                "dot"+i
+            );
+
+
+        dot.classList.toggle(
+            "active",
+            i<=paperStep
+        );
+    }
+}
+
+
+/* =========================================================
+   ANIMATION QUEUE
+========================================================= */
+
+let animationQueue =
+    [];
+
+let animationRunning =
+    false;
+
+
+/* =========================================================
+   SETUP ARAH MESSAGE
+========================================================= */
+
+function setupMessageDirection(){
+
+    const messages =
+        document.querySelectorAll(
+            ".chat-area .message"
+        );
+
+
+    messages.forEach(
+        (message,index)=>{
+
+            message.classList.remove(
+                "from-left",
+                "from-right"
+            );
+
+
+            if(index % 2 === 0){
+
+                message.classList.add(
+                    "from-left"
+                );
+
+            }else{
+
+                message.classList.add(
+                    "from-right"
+                );
+
+            }
+
+
+            message.dataset.queued =
+                "false";
+
+        }
+    );
+}
+
+
+/* =========================================================
+   PROCESS QUEUE
+========================================================= */
+
+function processAnimationQueue(){
+
+    if(animationRunning)
+        return;
+
+
+    if(
+        animationQueue.length === 0
+    )
+        return;
+
+
+    animationRunning =
+        true;
+
+
+    const item =
+        animationQueue.shift();
+
+
+    item.classList.add(
+        "visible"
+    );
+
+
+    setTimeout(()=>{
+
+        animationRunning =
+            false;
+
+
+        processAnimationQueue();
+
+    },450);
+}
+
+
+/* =========================================================
+   QUEUE MESSAGE
+========================================================= */
+
+function queueAnimation(item){
+
+    if(
+        item.classList.contains(
+            "visible"
+        )
+    ){
+
+        return;
+    }
+
+
+    if(
+        item.dataset.queued ===
+        "true"
+    ){
+
+        return;
+    }
+
+
+    item.dataset.queued =
+        "true";
+
+
+    animationQueue.push(
+        item
+    );
+
+
+    processAnimationQueue();
+}
+
+
+/* =========================================================
+   SHOW FINAL LETTER
+========================================================= */
+
+function showFinalLetter(){
+
+    const crumpleScreen =
+        document.getElementById(
+            "crumpleScreen"
+        );
+
+
+    const letterPage =
+        document.getElementById(
+            "letterPage"
+        );
+
+
+    createConfetti();
+
+
+    /*
+     * Reset queue
+     */
+
+    animationQueue =
+        [];
+
+    animationRunning =
+        false;
+
+
+    crumpleScreen.style.opacity =
+        "0";
+
+
+    setTimeout(()=>{
+
+        crumpleScreen.classList.remove(
+            "active"
+        );
+
+
+        crumpleScreen.style.opacity =
+            "";
+
+
+        letterPage.classList.add(
+            "show"
+        );
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+        /*
+         * Mulai observer
+         */
+
+        initializeScrollAnimations();
+
+    },800);
+}
+
+
+/* =========================================================
+   PHOTO SLIDER
+========================================================= */
+
+const slides =
+    document.querySelectorAll(
+        ".photo-slide"
+    );
+
+
+const photoDots =
+    document.getElementById(
+        "photoDots"
+    );
+
+
+const photoCounter =
+    document.getElementById(
+        "photoCounter"
+    );
+
+
+let currentPhoto =
+    0;
+
+
+let photoTimer =
+    null;
+
+
+const totalPhotos =
+    slides.length;
+
+
+/* BUAT DOT */
+
+for(
+    let i=0;
+    i<totalPhotos;
+    i++
+){
+
+    const dot =
+        document.createElement(
+            "button"
+        );
+
+
+    dot.className =
+        "photo-dot";
+
+
+    dot.setAttribute(
+        "aria-label",
+        "Foto "+(i+1)
+    );
+
+
+    dot.onclick =
+        ()=>{
+
+            showPhoto(i);
+
+            restartPhotoTimer();
+
+        };
+
+
+    photoDots.appendChild(
+        dot
+    );
+}
+
+
+const dots =
+    document.querySelectorAll(
+        ".photo-dot"
+    );
+
+
+function showPhoto(index){
+
+    if(index < 0)
+
+        index =
+            totalPhotos-1;
+
+
+    if(index >= totalPhotos)
+
+        index =
+            0;
+
+
+    currentPhoto =
+        index;
+
+
+    slides.forEach(
+        (slide,i)=>{
+
+            slide.classList.toggle(
+                "active",
+                i === currentPhoto
+            );
+
+        }
+    );
+
+
+    dots.forEach(
+        (dot,i)=>{
+
+            dot.classList.toggle(
+                "active",
+                i === currentPhoto
+            );
+
+        }
+    );
+
+
+    photoCounter.innerHTML =
+
+        (currentPhoto+1)+
+        " / "+
+        totalPhotos;
+}
+
+
+function nextPhoto(){
+
+    showPhoto(
+        currentPhoto+1
+    );
+
+    restartPhotoTimer();
+}
+
+
+function previousPhoto(){
+
+    showPhoto(
+        currentPhoto-1
+    );
+
+    restartPhotoTimer();
+}
+
+
+/* =========================================================
+   AUTO PHOTO
+========================================================= */
+
+function startPhotoTimer(){
+
+    clearInterval(
+        photoTimer
+    );
+
+
+    photoTimer =
+        setInterval(()=>{
+
+            showPhoto(
+                currentPhoto+1
+            );
+
+        },4000);
+}
+
+
+function restartPhotoTimer(){
+
+    startPhotoTimer();
+}
+
+
+/* =========================================================
+   PHOTO MODAL
+========================================================= */
+
+const photoModal =
+    document.getElementById(
+        "photoModal"
+    );
+
+
+const modalImage =
+    document.getElementById(
+        "modalImage"
+    );
+
+
+const photoList = [
+
+    "elsa.jpeg",
+    "kenangan1.jpeg",
+    "kenangan2.jpeg",
+    "kenangan3.jpeg",
+    "kenangan4.jpeg",
+    "kenangan5.jpeg",
+    "kenangan6.jpeg",
+    "kenangan7.jpeg",
+    "kenangan8.jpeg",
+    "kenangan9.jpeg",
+    "kenangan10.jpeg",
+    "kenangan11.jpeg",
+    "kenangan12.jpeg"
+
+];
+
+
+function openPhotoModal(index){
+
+    clearInterval(
+        photoTimer
+    );
+
+
+    currentPhoto =
+        index;
+
+
+    showPhoto(
+        index
+    );
+
+
+    modalImage.src =
+        photoList[index];
+
+
+    photoModal.classList.add(
+        "active"
+    );
+}
+
+
+function closePhotoModal(){
+
+    photoModal.classList.remove(
+        "active"
+    );
+
+
+    setTimeout(()=>{
+
+        startPhotoTimer();
+
+    },300);
+}
+
+
+/* =========================================================
+   ESC + PHOTO KEYBOARD
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            photoModal.classList.contains(
+                "active"
+            )
+        ){
+
+            if(
+                event.key ===
+                "ArrowRight"
+            ){
+
+                openPhotoModal(
+                    (
+                        currentPhoto+1
+                    ) %
+                    totalPhotos
+                );
+
+                return;
+            }
+
+
+            if(
+                event.key ===
+                "ArrowLeft"
+            ){
+
+                openPhotoModal(
+                    (
+                        currentPhoto-1+
+                        totalPhotos
+                    ) %
+                    totalPhotos
+                );
+
+                return;
+            }
+
+
+            if(
+                event.key ===
+                "Escape"
+            ){
+
+                closePhotoModal();
+
+                return;
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+function initializeScrollAnimations(){
+
+    setupMessageDirection();
+
+
+    const items =
+        document.querySelectorAll(
+
+            ".chat-area .message,"+
+            ".chat-area .special-message,"+
+            ".thank-box,"+
+            ".signature,"+
+            ".end"
+
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+
+            entries=>{
+
+                entries.forEach(
+                    entry=>{
+
+                        if(
+                            !entry.isIntersecting
+                        ){
+
+                            return;
+                        }
+
+
+                        const element =
+                            entry.target;
+
+
+                        /*
+                         * MESSAGE
+                         *
+                         * Masuk queue.
+                         */
+
+                        if(
+                            element.classList.contains(
+                                "message"
+                            )
+                        ){
+
+                            queueAnimation(
+                                element
+                            );
+
+                        }
+
+
+                        /*
+                         * Elemen lain
+                         */
+
+                        else{
+
+                            element.classList.add(
+                                "visible"
+                            );
+
+                        }
+
+
+                        observer.unobserve(
+                            element
+                        );
+
+                    }
+                );
+
+            },
+
+            {
+
+                threshold:.12,
+
+                rootMargin:
+                    "0px 0px -80px 0px"
+
+            }
+
+        );
+
+
+    items.forEach(
+        item=>{
+
+            observer.observe(
+                item
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+function createConfetti(){
+
+    const symbols = [
+
+        "🤍",
+        "✨",
+        "💜",
+        "🌸",
+        "⭐",
+        "💫",
+        "♡"
+
+    ];
+
+
+    for(
+        let i=0;
+        i<60;
+        i++
+    ){
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "confetti";
+
+
+        item.innerText =
+            symbols[
+                Math.floor(
+                    Math.random()*
+                    symbols.length
+                )
+            ];
+
+
+        item.style.left =
+            Math.random()*100+
+            "vw";
+
+
+        item.style.fontSize =
+            Math.random()*15+
+            10+
+            "px";
+
+
+        item.style.animationDuration =
+            Math.random()*2+
+            3+
+            "s";
+
+
+        item.style.animationDelay =
+            Math.random()*.5+
+            "s";
+
+
+        document.body.appendChild(
+            item
+        );
+
+
+        setTimeout(()=>{
+
+            item.remove();
+
+        },5000);
+
+    }
+}
+
+
+/* =========================================================
+   RESET EVERYTHING
+========================================================= */
+
+function resetEverything(){
+
+    /*
+     * RESET ANIMATION QUEUE
+     */
+
+    animationQueue =
+        [];
+
+    animationRunning =
+        false;
+
+
+    /* ---------------------------------
+       RESET ENVELOPE
+    --------------------------------- */
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    envelope.classList.remove(
+        "open",
+        "closing",
+        "resetting"
+    );
+
+
+    /* ---------------------------------
+       RESET PAPER
+    --------------------------------- */
+
+    const paper =
+        document.getElementById(
+            "crumpledPaper"
+        );
+
+
+    paper.className =
+        "crumpled-paper step0";
+
+
+    paperStep =
+        0;
+
+
+    paperBusy =
+        false;
+
+
+    updateProgress();
+
+
+    const instruction =
+        document.getElementById(
+            "crumpleInstruction"
+        );
+
+
+    instruction.innerHTML =
+        "✨ Klik kertas untuk membukanya ✨";
+
+
+    /* ---------------------------------
+       RESET CRUMPLE
+    --------------------------------- */
+
+    const crumpleScreen =
+        document.getElementById(
+            "crumpleScreen"
+        );
+
+
+    crumpleScreen.classList.remove(
+        "active"
+    );
+
+
+    crumpleScreen.style.opacity =
+        "";
+
+
+    /* ---------------------------------
+       RESET LETTER
+    --------------------------------- */
+
+    const letterPage =
+        document.getElementById(
+            "letterPage"
+        );
+
+
+    letterPage.classList.remove(
+        "show",
+        "closing"
+    );
+
+
+    /* ---------------------------------
+       RESET SEMUA PESAN
+    --------------------------------- */
+
+    document
+        .querySelectorAll(
+            ".chat-area .message"
+        )
+        .forEach(
+            message=>{
+
+                message.classList.remove(
+                    "visible",
+                    "from-left",
+                    "from-right"
+                );
+
+
+                message.dataset.queued =
+                    "false";
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".special-message,"+
+            ".thank-box,"+
+            ".signature,"+
+            ".end"
+        )
+        .forEach(
+            element=>{
+
+                element.classList.remove(
+                    "visible"
+                );
+
+            }
+        );
+
+
+    /* ---------------------------------
+       RESET SCROLL
+    --------------------------------- */
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"instant"
+
+    });
+
+
+    /* ---------------------------------
+       RESET ENVELOPE SCREEN
+    --------------------------------- */
+
+    const envelopeScreen =
+        document.getElementById(
+            "envelopeScreen"
+        );
+
+
+    envelopeScreen.classList.remove(
+        "hide"
+    );
+
+
+    /* ---------------------------------
+       RESET MUSIC
+    --------------------------------- */
+
+    stopMusic();
+
+
+    /* ---------------------------------
+       RESET PHOTO
+    --------------------------------- */
+
+    currentPhoto =
+        0;
+
+
+    showPhoto(
+        0
+    );
+
+
+    startPhotoTimer();
+
+
+    /* ---------------------------------
+       RESET FLAG
+    --------------------------------- */
+
+    envelopeOpened =
+        false;
+}
+
+
+/* =========================================================
+   TUTUP SURAT
+========================================================= */
+
+let closingInProgress =
+    false;
+
+
+function closeLetter(){
+
+    if(closingInProgress)
+        return;
+
+
+    closingInProgress =
+        true;
+
+
+    const letterPage =
+        document.getElementById(
+            "letterPage"
+        );
+
+
+    const closingAnimation =
+        document.getElementById(
+            "closingAnimation"
+        );
+
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    /* ---------------------------------
+       STOP PHOTO
+    --------------------------------- */
+
+    clearInterval(
+        photoTimer
+    );
+
+
+    /* ---------------------------------
+       CLOSE MODAL
+    --------------------------------- */
+
+    photoModal.classList.remove(
+        "active"
+    );
+
+
+    /* ---------------------------------
+       CLOSE LETTER
+    --------------------------------- */
+
+    letterPage.classList.add(
+        "closing"
+    );
+
+
+    closingAnimation.classList.add(
+        "active"
+    );
+
+
+    /* ---------------------------------
+       AFTER ANIMATION
+    --------------------------------- */
+
+    setTimeout(()=>{
+
+        closingAnimation.classList.remove(
+            "active"
+        );
+
+
+        resetEverything();
+
+
+        setTimeout(()=>{
+
+            envelope.classList.add(
+                "resetting"
+            );
+
+
+            setTimeout(()=>{
+
+                envelope.classList.remove(
+                    "resetting"
+                );
+
+
+                closingInProgress =
+                    false;
+
+            },500);
+
+        },200);
+
+    },1100);
+}
+
+
+/* =========================================================
+   KEYBOARD OPEN / CLOSE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        /*
+         * ENTER / SPACE
+         */
+
+        if(
+            event.key === "Enter" ||
+            event.key === " "
+        ){
+
+            const envelopeScreen =
+                document.getElementById(
+                    "envelopeScreen"
+                );
+
+
+            const crumpleScreen =
+                document.getElementById(
+                    "crumpleScreen"
+                );
+
+
+            if(
+                !envelopeOpened &&
+                !envelopeScreen.classList.contains(
+                    "hide"
+                )
+            ){
+
+                event.preventDefault();
+
+                openEnvelope();
+
+                return;
+            }
+
+
+            if(
+                crumpleScreen.classList.contains(
+                    "active"
+                ) &&
+                paperStep < 4
+            ){
+
+                event.preventDefault();
+
+                openCrumpledPaper();
+
+                return;
+            }
+
+        }
+
+
+        /*
+         * ESC MENUTUP SURAT
+         */
+
+        if(
+            event.key === "Escape"
+        ){
+
+            const letterPage =
+                document.getElementById(
+                    "letterPage"
+                );
+
+
+            if(
+                letterPage.classList.contains(
+                    "show"
+                )
+            ){
+
+                closeLetter();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+updateMusicButton();
+
+showPhoto(0);
+
+startPhotoTimer();
+
+</script>
+
+</body>
+
+</html>
